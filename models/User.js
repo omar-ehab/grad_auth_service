@@ -1,15 +1,15 @@
-const axios = require('axios');const createError = require('http-errors');
+const axios = require('axios');
 const bcrypt = require('bcrypt');
 
 const STUDENT_OPTIONS = {
-    hostname: 'http://127.0.0.1',
-    port: 8000,
+    hostname: process.env.STUDENT_HOST,
+    port: process.env.STUDENT_PORT,
     path: '/find',
 }
 
 const TEACHER_OPTIONS = {
-    hostname: 'http://127.0.0.1',
-    port: 5000,
+    hostname: process.env.TEACHER_HOST,
+    port: process.env.TEACHER_PORT,
     path: '/find',
 }
 
