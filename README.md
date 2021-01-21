@@ -66,6 +66,8 @@ POST /auth/student/logout
 ```
 
 
+
+
 ## Teacher Authentication Endpoints
 
 ### login endpoint
