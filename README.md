@@ -1,5 +1,20 @@
 # Auth Service
 
+## installation
+1- install packages by running
+
+```bash
+$ npm install
+```
+
+2- copy .env.example and past it in same root folder and change the name to ".env"
+3- open .env and fillup the date
+4- make sure redis database is running
+5- run project
+
+```bash
+$ npm run start
+```
 
 ## Student Authentication Endpoints
 
