@@ -1,9 +1,16 @@
 const router = require('express').Router();
 
-const controller = require('../controllers/AuthController')
+const controller = require('../controllers/AuthController');
 
-router.post('/login', controller.login);
-router.post('/refresh', controller.refresh);
-router.post('/logout', controller.logout);
+const { verifyAccessToken } = require('../helpers/jwt_helper');
+
+router.post('/student/login', controller.student_login);
+router.post('/student/refresh', controller.student_refresh);
+router.post('/student/logout', verifyAccessToken, controller.student_logout);
+
+
+router.post('/teacher/login', controller.teacher_login);
+router.post('/teacher/refresh', controller.teacher_refresh);
+router.post('/teacher/logout', verifyAccessToken, controller.teacher_logout);
 
 module.exports = router;

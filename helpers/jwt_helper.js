@@ -1,6 +1,6 @@
-const JWT = require('jsonwebtoken')
-const createError = require('http-errors')
-const client = require('./init_redis')
+const JWT = require('jsonwebtoken');
+const createError = require('http-errors');
+const client = require('./init_redis');
 
 module.exports = {
   signAccessToken: (userId) => {
@@ -14,7 +14,6 @@ module.exports = {
       }
       JWT.sign(payload, secret, options, (err, token) => {
         if (err) {
-          console.log(err.message)
           reject(createError.InternalServerError());
           return
         }
@@ -23,7 +22,9 @@ module.exports = {
     })
   },
   verifyAccessToken: (req, res, next) => {
-    if (!req.headers['authorization']) return next(createError.Unauthorized())
+    if (!req.headers['authorization']) {
+      return next(createError.Unauthorized());
+    }
     const authHeader = req.headers['authorization']
     const bearerToken = authHeader.split(' ')
     const token = bearerToken[1]
@@ -31,13 +32,13 @@ module.exports = {
       if (err) {
         const message =
           err.name === 'JsonWebTokenError' ? 'Unauthorized' : err.message
-        return next(createError.Unauthorized(message))
+        return next(createError.Unauthorized(message));
       }
       req.payload = payload
       next()
     })
   },
-  signRefreshToken: (userId) => {
+  signRefreshToken: (userId, type) => {
     return new Promise((resolve, reject) => {
       const payload = {}
       const secret = process.env.REFRESH_KEY
@@ -48,22 +49,20 @@ module.exports = {
       }
       JWT.sign(payload, secret, options, (err, token) => {
         if (err) {
-          console.log(err.message)
           reject(createError.InternalServerError())
         }
 
-        client.SET(userId, token, 'EX', 365 * 24 * 60 * 60, (err, reply) => {
+        client.SET(`${userId}_${type}_refresh`, token, 'EX', 14 * 24 * 60 * 60, (err, reply) => {
           if (err) {
-            console.log(err.message)
             reject(createError.InternalServerError())
             return
           }
           resolve(token)
-        })
+        });
       })
     })
   },
-  verifyRefreshToken: (refreshToken) => {
+  verifyRefreshToken: (refreshToken, type) => {
     return new Promise((resolve, reject) => {
       JWT.verify(
         refreshToken,
@@ -73,16 +72,15 @@ module.exports = {
             return reject(createError.Unauthorized())
           }
           const userId = payload.aud;
-          client.GET(userId, (err, result) => {
+          client.GET(`${userId}_${type}_refresh`, (err, result) => {
             if (err) {
-              console.log(err.message);
               reject(createError.InternalServerError());
               return
             }
             if (refreshToken === result) { 
-              return resolve(userId)
+              return resolve(userId);
             }
-            reject(createError.Unauthorized())
+            reject(createError.Unauthorized());
           });
         }
       )
