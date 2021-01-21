@@ -1,4 +1,4 @@
-#Student Authentication Endpoints
+# Student Authentication Endpoints
 
 ```http
 POST /auth/student/login
@@ -61,7 +61,7 @@ POST /auth/student/logout
 ```
 
 
-#Teacher Authentication Endpoints
+# Teacher Authentication Endpoints
 
 ```http
 POST /auth/teacher/login
