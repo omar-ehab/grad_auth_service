@@ -1,5 +1,6 @@
 # Student Authentication Endpoints
 
+## login endpoint
 ```http
 POST /auth/student/login
 ```
@@ -22,6 +23,7 @@ POST /auth/student/login
 
 ```
 
+## refresh endpoint
 ```http
 POST /auth/student/refresh
 ```
@@ -41,7 +43,7 @@ POST /auth/student/refresh
   "expiresIn"     : string
 }
 ```
-
+## logout endpoint
 ```http
 POST /auth/student/logout
 ```
@@ -63,6 +65,7 @@ POST /auth/student/logout
 
 # Teacher Authentication Endpoints
 
+## login endpoint
 ```http
 POST /auth/teacher/login
 ```
@@ -85,6 +88,7 @@ POST /auth/teacher/login
 
 ```
 
+## refresh endpoint
 ```http
 POST /auth/teacher/refresh
 ```
@@ -105,6 +109,7 @@ POST /auth/teacher/refresh
 }
 ```
 
+## logout endpoint
 ```http
 POST /auth/teacher/logout
 ```
