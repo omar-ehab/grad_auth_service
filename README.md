@@ -1,6 +1,9 @@
-# Student Authentication Endpoints
+# Auth Service
 
-## login endpoint
+
+## Student Authentication Endpoints
+
+### login endpoint
 ```http
 POST /auth/student/login
 ```
@@ -11,7 +14,7 @@ POST /auth/student/login
 | `password` | `string` | **Required**. |
 
 
-## Response
+### Response
 
 ```javascript
 {
@@ -23,7 +26,7 @@ POST /auth/student/login
 
 ```
 
-## refresh endpoint
+### refresh endpoint
 ```http
 POST /auth/student/refresh
 ```
@@ -33,7 +36,7 @@ POST /auth/student/refresh
 | `refreshToken` | `string` | **Required**. |
 
 
-## Response
+### Response
 
 ```javascript
 {
@@ -43,7 +46,7 @@ POST /auth/student/refresh
   "expiresIn"     : string
 }
 ```
-## logout endpoint
+### logout endpoint
 ```http
 POST /auth/student/logout
 ```
@@ -53,7 +56,7 @@ POST /auth/student/logout
 | `Authorization` | `Bearer "accessToken"` | **Required**. |
 
 
-## Response
+### Response
 
 ```javascript
 {
@@ -63,9 +66,9 @@ POST /auth/student/logout
 ```
 
 
-# Teacher Authentication Endpoints
+## Teacher Authentication Endpoints
 
-## login endpoint
+### login endpoint
 ```http
 POST /auth/teacher/login
 ```
@@ -88,7 +91,7 @@ POST /auth/teacher/login
 
 ```
 
-## refresh endpoint
+### refresh endpoint
 ```http
 POST /auth/teacher/refresh
 ```
@@ -98,7 +101,7 @@ POST /auth/teacher/refresh
 | `refreshToken` | `string` | **Required**. |
 
 
-## Response
+### Response
 
 ```javascript
 {
@@ -109,7 +112,7 @@ POST /auth/teacher/refresh
 }
 ```
 
-## logout endpoint
+### logout endpoint
 ```http
 POST /auth/teacher/logout
 ```
@@ -119,7 +122,7 @@ POST /auth/teacher/logout
 | `Authorization` | `Bearer "accessToken"` | **Required**. |
 
 
-## Response
+### Response
 
 ```javascript
 {
